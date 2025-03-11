@@ -2,17 +2,30 @@ import os
 import flask
 from flask import request, flash
 import pandas as pd
+from flask_peewee.db import Database
 import matplotlib.pyplot as plt
 
 app = flask.Flask(__name__)
 
-data = {'Nodarbība': ['6.12', '29.11', '22.11', '01.11'],
-        'Atzīme': [4.92, 4.62, 4.76, 5.62]}
-df = pd.DataFrame(data)
-df.plot(x='Nodarbība', y='Atzīme', kind='bar', color='red')
-plt.title('Atzīmes pa nodarbībām')
-plt.savefig('static/myplot.png')
+DATABASE = {
+    'name': 'stats.db',
+    'engine': 'peewee.SqliteDatabase'
+}
+app.secret_key = 'dingledong'
 
+#data
+df = pd.read_csv('static/Example.csv', sep=';')
+#1st diagramm
+df.plot(x='Month', y='Amount', kind='bar', color='red')
+plt.title('Atzīmes pa nodarbībām')
+plt.legend().remove()
+plt.savefig('static/myplot1.png')
+#2nd diagramm
+labels=df['Month'].values
+df.plot.pie(y='Amount', labels=labels)
+plt.title('Atzīmes pa nodarbībām')
+plt.legend().remove()
+plt.savefig('static/myplot2.png')
 
 
 @app.route('/')
@@ -23,9 +36,6 @@ def home():
 @app.route('/Upload', methods=['GET', 'POST'])
 def upload():
     if request.method == 'POST':
-        if 'file' not in request.files:
-            flash('No file part')
-            return flask.render_template('upload.html')
         file = request.files['file']
         if file.filename == '':
             flash('No selected file')

@@ -1,9 +1,17 @@
 {% extends "base.html" %}
 {% block content %}
+    
 <form method="post" enctype="multipart/form-data">
     <input type="file" name="upload">
     <input type="submit" value="View">
 </form>
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for msg in messages %}
+            <p>{{msg}}</p>
+        {% endfor %}
+    {% endif %}
+{%endwith %}
 <div class="statloc">
 
 </div>
