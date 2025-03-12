@@ -1,5 +1,6 @@
 import os
 import flask
+from flask import request
 import pandas as pd
 from flask_peewee.db import Database
 import matplotlib.pyplot as plt
@@ -34,8 +35,21 @@ table=df.to_html('templates/ExampTable.html')
 def home():
     return flask.render_template('home.html')
 
-@app.route('/Upload', methods=['GET', 'POST'])
+@app.route('/upload', methods=['GET', 'POST'])
 def upload():
+    if request.method == 'POST': 
+        if 'file' not in request.files:
+            return "No file part"
+        file = request.files['file']
+
+        if file.filename == '':
+            return "No selected file"
+
+        if file:
+            df = pd.read_csv(file)
+            print(df)
+
+            return f"CSV file uploaded successfully!<br><br>{df.to_html()}"
     return flask.render_template('upload.html')  
 
 @app.route('/example')

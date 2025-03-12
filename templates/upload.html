@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
     
-<form method="post" enctype="multipart/form-data">
-    <input type="file" name="upload">
-    <input type="submit" value="View">
+<form action="/upload" method="POST" enctype="multipart/form-data">
+    <input type="file" name="file" accept=".csv" required>
+    <button type="submit">Upload</button>
 </form>
 {% with messages = get_flashed_messages() %}
     {% if messages %}
@@ -12,7 +12,5 @@
         {% endfor %}
     {% endif %}
 {%endwith %}
-<div class="statloc">
 
-</div>
 {% endblock %}
