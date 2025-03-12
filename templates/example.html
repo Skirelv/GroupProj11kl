@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
-<img src="{{ url_for('static', filename='myplot1.png') }}">
-<img src="{{ url_for('static', filename='myplot2.png') }}">
+<div id="eximg1"><img src="{{ url_for('static', filename='myplot1.png') }}"></div>
+<div id="eximg2"><img src="{{ url_for('static', filename='myplot2.png') }}"></div>
 {% include "ExampTable.html" %}
+<a href="/static/Example.csv" class="button" download>download example csv</a>
 {% endblock %}

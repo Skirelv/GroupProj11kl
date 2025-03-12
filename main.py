@@ -18,13 +18,14 @@ df = pd.read_csv('static/Example.csv', sep=';')
 df.plot(x='Month', y='Amount', kind='bar', color='red')
 plt.title('Money spent')
 plt.legend().remove()
-plt.savefig('static/myplot1.png')
+plt.savefig('static/myplot1.png', dpi=75)
 #2nd diagramm
 labels=df['Month'].values
 df.plot.pie(y='Amount', labels=labels)
+plt.ylabel('')
 plt.title('Money spent')
 plt.legend().remove()
-plt.savefig('static/myplot2.png')
+plt.savefig('static/myplot2.png', dpi=75)
 #csv show 
 table=df.to_html('templates/ExampTable.html')
 
