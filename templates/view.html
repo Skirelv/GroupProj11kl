@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
-<form action="/view">
+<form action="/view" method="post">
     <div>Chart type:</div>
     <select name="ChartType" id="Type">
-        <option value="histogram">Histogram</option>
-        <option value="pie">Pie</option>
+        <option value="Histogram">Histogram</option>
+        <option value="Pie">Pie</option>
     </select>
     <div>Data type:</div>
     <select name="DataType" id="Type">
@@ -12,25 +12,26 @@
         <option value="1Year1MonthAllData">1 Year and 1 month but all data</option>
     </select>
     <div>Year:</div>
-    <select id="years">
+    <select name="Year" id="years">
         {% for year in years %}
             <option value="{{ year.Year }}">{{ year.Year }}</option>
         {% endfor %}
     </select>
     <!--if allmonth-->
-    <select id="bill">
-        <option value="sum">Sum</option>
-        <option value="Electricity">Electricity</option>
+    <select name="Bill" id="bill">
+        <option value="Sum">Sum</option>
+        <option value="Electric">Electricity</option>
         <option value="Water">Water</option>
         <option value="Gas">Gas</option>
         <option value="Internet">Internet</option>
     </select>
     <!--if 1month-->
-    <select id="months">
+    <select name="Month" id="months">
         {% for month in months %}
             <option value="{{ month.Month }}">{{ month.Month }}</option>
         {% endfor %}
     </select>
-    
+    <button type="submit">Upload</button>
 </form>
+<img src="{{ url_for('static', filename='dataplot.png') }}">
 {% endblock %}

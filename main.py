@@ -3,7 +3,10 @@ from flask import request
 import pandas as pd
 from flask_peewee.db import Database
 from peewee import FloatField, TextField, IntegerField
+import matplotlib
+matplotlib.use('Agg') # makes plots only on the backend
 import matplotlib.pyplot as plt
+
 
 import os
 
@@ -48,14 +51,41 @@ def upload():
                             Gas=float(row['Gas'].replace(',', '.')), 
                             Internet=float(row['Internet'].replace(',', '.')), 
                             Sum=float(row['Sum'].replace(',', '.')))
-            return flask.redirect(flask.url_for('view'))
+            return flask.render_template('upload.html')  
     return flask.render_template('upload.html')  
+
+
 
 @app.route('/view', methods=['GET','POST'])
 def view():
-    
     Years_list=Data.select(Data.Year).distinct()
     Month_list=Data.select(Data.Month).distinct()
+    if request.method == 'POST':
+        choices = request.form
+        #get lists from database
+        if choices['DataType'] == '1YearAllMonth1Data':
+            Bill = choices['Bill']
+            Colx = Data.select(getattr(Data, Bill)).where(Data.Year == choices['Year']) 
+            Coly = Data.select(Data.Month).where(Data.Year == choices['Year'])
+            xlist = [getattr(row, Bill) for row in Colx]
+            ylist = [row.Month for row in Coly]
+        else:
+            Col = Data.get_or_none((Data.Year == choices['Year']) & (Data.Month == choices['Month']))
+            xlist = [Col.Electric, Col.Water, Col.Gas, Col.Internet]
+            ylist = ['Electric', 'Water', 'Gas', 'Internet']
+        #make the diagrammes
+        if choices['ChartType'] == 'Histogram':
+                plt.bar(x=ylist, height=xlist)
+                plt.legend().remove()
+                plt.savefig('static/dataplot.png', dpi=75)
+                plt.close()
+        else:
+                plt.pie(x=xlist,labels=ylist)
+                plt.legend().remove()
+                plt.savefig('static/dataplot.png', dpi=75)
+                plt.close()
+        print(choices)
+        return flask.render_template('view.html', years=Years_list, months=Month_list)
     return flask.render_template('view.html', years=Years_list, months=Month_list)
 
 
