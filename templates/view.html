@@ -1,4 +1,36 @@
 {% extends "base.html" %}
 {% block content %}
-ok
+<form action="/view">
+    <div>Chart type:</div>
+    <select name="ChartType" id="Type">
+        <option value="histogram">Histogram</option>
+        <option value="pie">Pie</option>
+    </select>
+    <div>Data type:</div>
+    <select name="DataType" id="Type">
+        <option value="1YearAllMonth1Data">1 Year and all months but 1 data</option>
+        <option value="1Year1MonthAllData">1 Year and 1 month but all data</option>
+    </select>
+    <div>Year:</div>
+    <select id="years">
+        {% for year in years %}
+            <option value="{{ year.Year }}">{{ year.Year }}</option>
+        {% endfor %}
+    </select>
+    <!--if allmonth-->
+    <select id="bill">
+        <option value="sum">Sum</option>
+        <option value="Electricity">Electricity</option>
+        <option value="Water">Water</option>
+        <option value="Gas">Gas</option>
+        <option value="Internet">Internet</option>
+    </select>
+    <!--if 1month-->
+    <select id="months">
+        {% for month in months %}
+            <option value="{{ month.Month }}">{{ month.Month }}</option>
+        {% endfor %}
+    </select>
+    
+</form>
 {% endblock %}

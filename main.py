@@ -2,7 +2,7 @@ import flask
 from flask import request
 import pandas as pd
 from flask_peewee.db import Database
-from peewee import FloatField, TextField 
+from peewee import FloatField, TextField, IntegerField
 import matplotlib.pyplot as plt
 
 import os
@@ -19,8 +19,13 @@ app.config.from_object(__name__)
 db = Database(app)
 
 class Data(db.Model):
-    date = TextField()
-    billsum = FloatField()
+    Year = IntegerField()
+    Month = TextField()
+    Electric = FloatField()
+    Water = FloatField()
+    Gas = FloatField()
+    Internet = FloatField()
+    Sum = FloatField()
 
 @app.route('/')
 def home():
@@ -34,11 +39,24 @@ def upload():
         file = request.files['file'] 
         if file:
             df = pd.read_csv(file, sep=';')
+            Data.delete().execute()
             for index, row in df.iterrows():
-                Data.create(date=row['Month'], billsum=row['Amount'])
-
-            return flask.render_template('view.html')
+                Data.create(Year=row['Year'], 
+                            Month=row['Month'], 
+                            Electric=float(row['Electric'].replace(',', '.')), 
+                            Water=float(row['Water'].replace(',', '.')), 
+                            Gas=float(row['Gas'].replace(',', '.')), 
+                            Internet=float(row['Internet'].replace(',', '.')), 
+                            Sum=float(row['Sum'].replace(',', '.')))
+            return flask.redirect(flask.url_for('view'))
     return flask.render_template('upload.html')  
+
+@app.route('/view', methods=['GET','POST'])
+def view():
+    
+    Years_list=Data.select(Data.Year).distinct()
+    Month_list=Data.select(Data.Month).distinct()
+    return flask.render_template('view.html', years=Years_list, months=Month_list)
 
 
 @app.route('/example')
