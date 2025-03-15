@@ -2,36 +2,62 @@
 {% block content %}
 <form action="/view" method="post">
     <div>Chart type:</div>
-    <select name="ChartType" id="Type">
+    <select name="ChartType" id="ChartType">
+        <option value="Nothing">Select</option>
         <option value="Histogram">Histogram</option>
         <option value="Pie">Pie</option>
     </select>
-    <div>Data type:</div>
-    <select name="DataType" id="Type">
-        <option value="1YearAllMonth1Data">1 Year and all months but 1 data</option>
-        <option value="1Year1MonthAllData">1 Year and 1 month but all data</option>
-    </select>
-    <div>Year:</div>
-    <select name="Year" id="years">
-        {% for year in years %}
-            <option value="{{ year.Year }}">{{ year.Year }}</option>
-        {% endfor %}
-    </select>
+    <div>Data type:
+        <select name="DataType" id="DataType" onchange="showSelect()">
+            <option value="Nothing">Select</option>
+            <option value="1YearAllMonth1Data">1 Year and all months but 1 data</option>
+            <option value="1Year1MonthAllData">1 Year and 1 month but all data</option>
+        </select>
+    </div>
+    <div>Year:
+        <select name="Year" id="years">
+            <option value="Nothing">Select</option>
+            {% for year in years %}
+                <option value="{{ year.Year }}">{{ year.Year }}</option>
+            {% endfor %}
+        </select>
+    </div>
     <!--if allmonth-->
-    <select name="Bill" id="bill">
-        <option value="Sum">Sum</option>
-        <option value="Electric">Electricity</option>
-        <option value="Water">Water</option>
-        <option value="Gas">Gas</option>
-        <option value="Internet">Internet</option>
-    </select>
+    <div id="bill" class="hidden">Bill:
+        <select name="Bill" id="bill">
+            <option value="Nothing">Select</option>
+            <option value="Sum">Sum</option>
+            <option value="Electric">Electricity</option>
+            <option value="Water">Water</option>
+            <option value="Gas">Gas</option>
+            <option value="Internet">Internet</option>
+        </select>
+    </div>
     <!--if 1month-->
-    <select name="Month" id="months">
-        {% for month in months %}
-            <option value="{{ month.Month }}">{{ month.Month }}</option>
-        {% endfor %}
-    </select>
+    <div id="months" class="hidden">Month:
+        <select name="Month" id="months">
+            <option value="Nothing">Select</option>
+            {% for month in months %}
+                <option value="{{ month.Month }}">{{ month.Month }}</option>
+            {% endfor %}
+        </select>
+    </div>
     <button type="submit">Upload</button>
 </form>
 <img src="{{ url_for('static', filename='dataplot.png') }}">
+
+<script>
+    function showSelect() {
+            document.getElementById("bill").classList.add("hidden");
+            document.getElementById("months").classList.add("hidden");
+
+            const category = document.getElementById("DataType").value;
+
+            if (category === "1YearAllMonth1Data") {
+                document.getElementById("bill").classList.remove("hidden");
+            } else if (category === "1Year1MonthAllData") {
+                document.getElementById("months").classList.remove("hidden");
+            }
+        }
+</script>
 {% endblock %}

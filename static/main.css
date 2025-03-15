@@ -68,3 +68,5 @@ a.article-title:hover {
     font-weight: bold;
     line-height: 25px;
 }
+
+.hidden { display: none; }
