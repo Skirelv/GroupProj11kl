@@ -7,9 +7,6 @@ import matplotlib
 matplotlib.use('Agg') # makes plots only on the backend
 import matplotlib.pyplot as plt
 
-
-import os
-
 DATABASE = {
     'name': 'data.db',
     'engine': 'peewee.SqliteDatabase'
@@ -69,22 +66,22 @@ def view():
             Coly = Data.select(Data.Month).where(Data.Year == choices['Year'])
             xlist = [getattr(row, Bill) for row in Colx]
             ylist = [row.Month for row in Coly]
+            plt.title('How much money was spent on ' + choices['Bill'] + ' in the year ' + choices['Year'])
         else:
             Col = Data.get_or_none((Data.Year == choices['Year']) & (Data.Month == choices['Month']))
             xlist = [Col.Electric, Col.Water, Col.Gas, Col.Internet]
             ylist = ['Electric', 'Water', 'Gas', 'Internet']
+            plt.title('How much money was spent in ' + choices['Year'] + ' ' + choices['Month'])
         #make the diagrammes
         if choices['ChartType'] == 'Histogram':
                 plt.bar(x=ylist, height=xlist)
                 plt.legend().remove()
-                plt.savefig('static/dataplot.png', dpi=75)
-                plt.close()
         else:
                 plt.pie(x=xlist,labels=ylist)
                 plt.legend().remove()
-                plt.savefig('static/dataplot.png', dpi=75)
-                plt.close()
-        print(choices)
+        #save the diagramme
+        plt.savefig('static/dataplot.png')
+        plt.close()
         return flask.render_template('view.html', years=Years_list, months=Month_list)
     return flask.render_template('view.html', years=Years_list, months=Month_list)
 
