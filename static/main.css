@@ -3,70 +3,47 @@
 }
 
 .bg-steel {
-    background-color: #353535;
+    background-color: #353535ea;
 }
 
 body {
-    background: #fafafa;
+    background: #490d0d;
     color: #333333;
     margin-top: 5rem;
-}
-
-.content-section {
-    background: #ffffff;
-    padding: 10px 20px;
-    border: 1px solid #dddddd;
-    border-radius: 3px;
-    margin-bottom: 20px;
-}
-
-.article-title {
-    color: #444444;
-}
-
-a.article-title:hover {
-    color: #428bca;
-    text-decoration: none;
-}
-
-.article-content {
-    white-space: pre-line;
-}
-
-.article-img {
-    height: 65px;
-    width: 65px;
-    margin-right: 16px;
-}
-
-.article-metadata {
-    padding-bottom: 1px;
-    margin-bottom: 4px;
-    border-bottom: 1px solid #e3e3e3
-}
-
-.article-metadata a:hover {
-    color: #333;
-    text-decoration: none;
-}
-
-.article-svg {
-    width: 25px;
-    height: 25px;
-    vertical-align: middle;
+    background-image: url("/static/cahs.gif");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .button {
     display: block;
-    width: 115px;
-    height: 25px;
-    background: #4E9CAF;
-    padding: 10px;
+    width: 500px;
+    height: 50px;
+    background: #b44848;
+    padding: 50px;
     text-align: center;
     border-radius: 5px;
     color: white;
     font-weight: bold;
-    line-height: 25px;
+    line-height: 0px;
+}
+
+.uploadbutton {
+    display: block;
+    width: 200px;
+    height: 50px;
+    background: #b44848;
+    padding: 50px;
+    text-align: center;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    line-height: 0px;
 }
 
 .hidden { display: none; }
+
+.hometext {
+    font-size: 100px;
+    color: white;
+}
