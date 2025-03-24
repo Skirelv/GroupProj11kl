@@ -1,14 +1,14 @@
 .site-header .navbar-nav .nav-link {
-    color: #353535;
+    color: #353535; /*#353535 vai FF5B00*/
 }
 
 .bg-steel {
-    background-color: #353535ea;
+    background-color: #ff590081;
 }
 
 body {
-    background: #490d0d;
-    color: #333333;
+    background: #008b8b; /*#490d0d vai #008b8b*/
+    color: #ffffff;
     margin-top: 5rem;
     background-image: url("/static/cahs.gif");
     background-repeat: no-repeat;
@@ -19,7 +19,7 @@ body {
     display: block;
     width: 500px;
     height: 50px;
-    background: #b44848;
+    background: #FFA800; /*#b44848 vai #FFA800*/
     padding: 50px;
     text-align: center;
     border-radius: 5px;
@@ -32,7 +32,7 @@ body {
     display: block;
     width: 200px;
     height: 50px;
-    background: #b44848;
+    background: #FFA800; /*#b44848 vai #FFA800*/
     padding: 50px;
     text-align: center;
     border-radius: 5px;
@@ -46,4 +46,55 @@ body {
 .hometext {
     font-size: 100px;
     color: white;
+}
+
+.cat {
+    position: absolute;
+    top: 680px;
+    left: 150px;
+}
+
+.burns {
+    position: absolute;
+    top: 650px;
+    right: 150px;
+}
+
+.our_vision {
+    font-size: 50px;
+    color: white;
+}
+
+.unbanana {
+    position: absolute;
+    top: -450px;
+    right: -200px;
+    transform: scale(0.5);
+    rotate: -60deg;
+}
+
+.fewbanana {
+    position: absolute;
+    top: -750px;
+    right: 600px;
+    transform: scale(0.2);
+    rotate: 80deg;
+}
+
+.bananatree {
+    position: absolute;
+    top: 50px;
+    right: 1000px;
+    transform: scale(0.4);
+}
+
+.our_monkey_vision {
+    font-size: 50px;
+    color: white;
+}
+
+.monkcar {
+    position: absolute;
+    top: 600px;
+    right: 200px;
 }
