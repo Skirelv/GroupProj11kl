@@ -43,11 +43,11 @@ def upload():
             for index, row in df.iterrows():
                 Data.create(Year=row['Year'], 
                             Month=row['Month'], 
-                            Electricity=float(row['Electricity'].replace(',', '.')), 
-                            Water=float(row['Water'].replace(',', '.')), 
-                            Gas=float(row['Gas'].replace(',', '.')), 
-                            Internet=float(row['Internet'].replace(',', '.')), 
-                            Sum=float(row['Sum'].replace(',', '.')))
+                            Electricity=float(row['Electricity']), 
+                            Water=float(row['Water']), 
+                            Gas=float(row['Gas']), 
+                            Internet=float(row['Internet']), 
+                            Sum=float(row['Sum']))
             return flask.render_template('upload.html')  
     return flask.render_template('upload.html')  
 
@@ -92,17 +92,20 @@ def example():
     #data
     df = pd.read_csv('static/Example.csv', sep=';')
     #1st diagramm
-    df.plot(x='Month', y='Amount', kind='bar', color='red')
-    plt.title('Money spent')
+    monthlist = df[df['Year'] == 2021]['Month']
+    electricity_2021 = df[df['Year'] == 2021]['Electricity']
+    print(electricity_2021)
+    plt.bar(height=electricity_2021, x=monthlist)
     plt.legend().remove()
+    plt.title('How much money was spent on electricity in the year 2021')
     plt.savefig('static/myplot1.png', dpi=75)
+    plt.close('all')
     #2nd diagramm
-    labels=df['Month'].values
-    df.plot.pie(y='Amount', labels=labels)
-    plt.ylabel('')
-    plt.title('Money spent')
+    plt.pie(x=electricity_2021, labels=monthlist)
     plt.legend().remove()
+    plt.title('How much money was spent on electricity in the year 2021')
     plt.savefig('static/myplot2.png', dpi=75)
+    plt.close('all')
     #csv show 
     df.to_html('templates/examptable.html')
 

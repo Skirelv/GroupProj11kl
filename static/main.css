@@ -10,9 +10,6 @@ body {
     background: #008b8b; /*#490d0d vai #008b8b*/
     color: #ffffff;
     margin-top: 5rem;
-    background-image: url("/static/cahs.gif");
-    background-repeat: no-repeat;
-    background-size: cover;
 }
 
 .button {
@@ -97,4 +94,14 @@ body {
     position: absolute;
     top: 600px;
     right: 200px;
+}
+
+#bg {
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+
+    /* Preserve aspet ratio */
+    min-width: 100%;
+    min-height: 100%;
 }
