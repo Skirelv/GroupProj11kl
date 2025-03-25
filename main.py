@@ -21,7 +21,7 @@ db = Database(app)
 class Data(db.Model):
     Year = IntegerField()
     Month = TextField()
-    Electric = FloatField()
+    Electricity = FloatField()
     Water = FloatField()
     Gas = FloatField()
     Internet = FloatField()
@@ -43,7 +43,7 @@ def upload():
             for index, row in df.iterrows():
                 Data.create(Year=row['Year'], 
                             Month=row['Month'], 
-                            Electric=float(row['Electric'].replace(',', '.')), 
+                            Electricity=float(row['Electricity'].replace(',', '.')), 
                             Water=float(row['Water'].replace(',', '.')), 
                             Gas=float(row['Gas'].replace(',', '.')), 
                             Internet=float(row['Internet'].replace(',', '.')), 
@@ -69,8 +69,8 @@ def view():
             plt.title('How much money was spent on ' + choices['Bill'] + ' in the year ' + choices['Year'])
         else:
             Col = Data.get_or_none((Data.Year == choices['Year']) & (Data.Month == choices['Month']))
-            xlist = [Col.Electric, Col.Water, Col.Gas, Col.Internet]
-            ylist = ['Electric', 'Water', 'Gas', 'Internet']
+            xlist = [Col.Electricity, Col.Water, Col.Gas, Col.Internet]
+            ylist = ['Electricity', 'Water', 'Gas', 'Internet']
             plt.title('How much money was spent in ' + choices['Year'] + ' ' + choices['Month'])
         #make the diagrammes
         if choices['ChartType'] == 'Histogram':
@@ -79,9 +79,10 @@ def view():
         else:
                 plt.pie(x=xlist,labels=ylist)
                 plt.legend().remove()
+                
         #save the diagramme
         plt.savefig('static/dataplot.png')
-        plt.close()
+        plt.close('all')
         return flask.render_template('view.html', years=Years_list, months=Month_list)
     return flask.render_template('view.html', years=Years_list, months=Month_list)
 
