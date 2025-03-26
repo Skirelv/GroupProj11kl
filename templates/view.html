@@ -42,9 +42,13 @@
             {% endfor %}
         </select>
     </div>
-    <button type="submit">Upload</button>
+    <button type="submit" class="uploadbutton">Submit</button>
 </form>
-<img src="{{ url_for('static', filename='dataplot.png') }}">
+<div>
+    <img src="{{ url_for('static', filename='dataplot.png') }}">
+    <br>
+    <a href="{{ url_for('static', filename='dataplot.png') }}" download="dataplot.png" class="uploadbutton">Download Image</a>
+</div>
 
 <script>
     function showSelect() {

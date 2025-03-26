@@ -1,99 +1,53 @@
-.site-header .navbar-nav .nav-link {
-    color: #353535; /*#353535 vai FF5B00*/
-}
-
-.bg-steel {
-    background-color: #ff590081;
-}
-
 body {
-    background: #008b8b; /*#490d0d vai #008b8b*/
+    background: #008b8b;
     color: #ffffff;
     margin-top: 5rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.button {
-    display: block;
-    width: 500px;
-    height: 50px;
-    background: #FFA800; /*#b44848 vai #FFA800*/
-    padding: 50px;
+.button, .uploadbutton {
+    display: inline-block;
+    padding: 1rem 2rem;
     text-align: center;
-    border-radius: 5px;
+    border-radius: 8px;
     color: white;
-    font-weight: bold;
-    line-height: 0px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    background: linear-gradient(135deg, #FFA800, #ff9500);
+    min-width: 200px;
 }
 
-.uploadbutton {
-    display: block;
-    width: 200px;
-    height: 50px;
-    background: #FFA800; /*#b44848 vai #FFA800*/
-    padding: 50px;
-    text-align: center;
-    border-radius: 5px;
+.button:hover, .uploadbutton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    background: linear-gradient(135deg, #ffb52e, #FFA800);
     color: white;
-    font-weight: bold;
-    line-height: 0px;
+    text-decoration: none;
 }
 
 .hidden { display: none; }
 
 .hometext {
-    font-size: 100px;
+    font-size: 3.5rem;
     color: white;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    margin-bottom: 2rem;
+    letter-spacing: 1px;
 }
 
-.cat {
+.cat, .burns, .monkcar {
     position: absolute;
-    top: 680px;
-    left: 150px;
+    transition: transform 0.3s ease;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
 }
 
-.burns {
-    position: absolute;
-    top: 650px;
-    right: 150px;
-}
-
-.our_vision {
-    font-size: 50px;
-    color: white;
-}
-
-.unbanana {
-    position: absolute;
-    top: -450px;
-    right: -200px;
-    transform: scale(0.5);
-    rotate: -60deg;
-}
-
-.fewbanana {
-    position: absolute;
-    top: -750px;
-    right: 600px;
-    transform: scale(0.2);
-    rotate: 80deg;
-}
-
-.bananatree {
-    position: absolute;
-    top: 50px;
-    right: 1000px;
-    transform: scale(0.4);
-}
-
-.our_monkey_vision {
-    font-size: 50px;
-    color: white;
-}
-
-.monkcar {
-    position: absolute;
-    top: 600px;
-    right: 200px;
+.cat:hover, .burns:hover, .monkcar:hover {
+    transform: scale(1.05);
 }
 
 #bg {
@@ -101,7 +55,286 @@ body {
     top: 0; 
     left: 0; 
 
-    /* Preserve aspet ratio */
     min-width: 100%;
     min-height: 100%;
+}
+
+.container {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    border-radius: 20px;
+    padding: 2.5rem;
+    margin-top: 2rem;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    z-index: 1;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.container:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.site-header {
+    position: relative;
+    width: 100%;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+.row {
+    margin: 0;
+}
+#bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.3;
+}
+
+.nav-container {
+    width: 100%;
+    padding-right: 2rem;
+    padding-left: 2rem;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 1200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.navbar {
+    padding: 0;
+    z-index: 1030;
+    background: linear-gradient(to right, rgba(255, 89, 0, 0.75), rgba(255, 89, 0, 0.65)) !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s ease;
+}
+
+.navbar-nav {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.navbar-nav .navbar-brand {
+    font-size: 1rem;
+    opacity: 0.9;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.navbar-nav .navbar-brand:hover {
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+    .nav-container {
+        padding-right: 1rem;
+        padding-left: 1rem;
+        height: 60px;
+    }
+    
+    .navbar-brand {
+        font-size: 1.2rem;
+    }
+    
+    .navbar-nav .navbar-brand {
+        font-size: 0.9rem;
+        padding: 0.4rem 0.8rem;
+    }
+}
+
+/* Inner content containers */
+.content-section {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Container headers */
+.container h1, .container h2, .container h3 {
+    color: #ffffff;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Container paragraphs */
+.container p {
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        padding: 1.5rem;
+        margin-top: 1.5rem;
+        border-radius: 15px;
+    }
+    
+    .content-section {
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+}
+
+.our_vision, .our_monkey_vision {
+    font-size: 1.8rem;
+    color: white;
+    line-height: 1.6;
+    margin: 2rem 0;
+    font-weight: 500;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Form styling */
+form {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+select, input[type="file"] {
+    background: rgba(255, 255, 255, 0.9);
+    color: black;
+    border: none;
+    padding: 0.8rem 1.2rem;
+    border-radius: 8px;
+    margin: 0.5rem 0;
+    width: 100%;
+    max-width: 300px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+select:focus, input[type="file"]:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(255, 165, 0, 0.3);
+}
+
+/* Table styling */
+.dataframe {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 2rem 0;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.dataframe th {
+    background: rgba(255, 165, 0, 0.2);
+    color: white;
+    padding: 1rem;
+    font-weight: 600;
+    text-align: left;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.dataframe td {
+    padding: 1rem;
+    color: white;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dataframe tr:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Banana elements */
+.unbanana, .fewbanana, .bananatree {
+    position: absolute;
+    transition: transform 0.3s ease;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
+}
+
+.unbanana {
+    top: -450px;
+    right: -200px;
+    transform: scale(0.5) rotate(-60deg);
+}
+
+.fewbanana {
+    top: -750px;
+    right: 600px;
+    transform: scale(0.2) rotate(80deg);
+}
+
+.bananatree {
+    top: 50px;
+    right: 1000px;
+    transform: scale(0.4);
+}
+
+.unbanana:hover {
+    transform: scale(0.6) rotate(-60deg);
+}
+
+.fewbanana:hover {
+    transform: scale(0.25) rotate(80deg);
+}
+
+.bananatree:hover {
+    transform: scale(0.45);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .hometext {
+        font-size: 2.5rem;
+    }
+    
+    .our_vision, .our_monkey_vision {
+        font-size: 1.4rem;
+    }
+    
+    .button, .uploadbutton {
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+    
+    .dataframe {
+        display: block;
+        overflow-x: auto;
+    }
 }
