@@ -167,16 +167,6 @@ body {
     }
 }
 
-/* Inner content containers */
-.content-section {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 15px;
-    padding: 2rem;
-    margin-bottom: 2rem;
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
 /* Container headers */
 .container h1, .container h2, .container h3 {
     color: #ffffff;
@@ -336,5 +326,27 @@ select:focus, input[type="file"]:focus {
     .dataframe {
         display: block;
         overflow-x: auto;
+    }
+}
+
+.warning-message {
+    background-color: #ff4444;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }

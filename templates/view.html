@@ -44,6 +44,13 @@
     </div>
     <button type="submit" class="uploadbutton">Submit</button>
 </form>
+<div class="content-section">
+    {% if not has_data %}
+    <div class="warning-message">
+        No data has been uploaded yet. Please upload your data file first.
+    </div>
+    {% endif %}
+</div>
 <div>
     <img src="{{ url_for('static', filename='dataplot.png') }}">
     <br>

@@ -22,22 +22,20 @@ app.config.from_object(__name__)
 # Initialize database
 db = Database(app)
 
-# Define database model for storing utility bill data
+# Define database model
 class Data(db.Model):
-    Year = IntegerField()      # Year of the bill
-    Month = TextField()        # Month of the bill
-    Electricity = FloatField() # Electricity cost
-    Water = FloatField()       # Water cost
-    Gas = FloatField()         # Gas cost
-    Internet = FloatField()    # Internet cost
-    Sum = FloatField()         # Total cost
+    Year = IntegerField()      
+    Month = TextField()        
+    Electricity = FloatField() 
+    Water = FloatField()       
+    Gas = FloatField()         
+    Internet = FloatField()    
+    Sum = FloatField()         
 
-# Route for home page
 @app.route('/')
 def home():
     return flask.render_template('home.html')
 
-# Route for file upload functionality
 @app.route('/upload', methods=['GET','POST'])
 def upload():
     if request.method == 'POST': 
@@ -58,6 +56,7 @@ def upload():
                             Gas=float(row['Gas']), 
                             Internet=float(row['Internet']), 
                             Sum=float(row['Sum']))
+            df.to_html('templates/viewtable.html')
             return flask.render_template('upload.html')  
     return flask.render_template('upload.html')  
 
@@ -67,6 +66,9 @@ def view():
     # Get unique years and months from database for dropdown menus
     Years_list=Data.select(Data.Year).distinct()
     Month_list=Data.select(Data.Month).distinct()
+    
+    # Check if there's any data in the database
+    has_data = Data.select().count() > 0
     
     if request.method == 'POST':
         choices = request.form
@@ -94,21 +96,20 @@ def view():
             # Create bar chart
             plt.bar(x=ylist, height=xlist)
             plt.xticks(rotation=45, ha='right')  # Rotate x-axis labels for better readability
-            plt.title(title, pad=20)  # Add title with padding
-            plt.tight_layout()  # Adjust layout to prevent label cutoff
+            plt.title(title, pad=20)  
+            plt.tight_layout()
         else:
             # Create pie chart
             plt.pie(x=xlist, labels=ylist, autopct='%1.1f%%', pctdistance=0.85)
-            plt.title(title, pad=20)  # Add title with padding
-            plt.tight_layout()  # Adjust layout to prevent label cutoff
+            plt.title(title, pad=20) 
+            plt.tight_layout() 
                 
         # Save the plot and clean up
         plt.savefig('static/dataplot.png', bbox_inches='tight', dpi=75)
         plt.close('all')
-        return flask.render_template('view.html', years=Years_list, months=Month_list)
-    return flask.render_template('view.html', years=Years_list, months=Month_list)
+        return flask.render_template('view.html', years=Years_list, months=Month_list, has_data=has_data)
+    return flask.render_template('view.html', years=Years_list, months=Month_list, has_data=has_data)
 
-# Route for example visualization
 @app.route('/example')
 def example():
     # Read example data from CSV
@@ -142,5 +143,9 @@ def example():
 
 # Initialize database and run the application
 if __name__ == '__main__':
-    Data.create_table(fail_silently=True)  # Create database table if it doesn't exist
-    app.run(debug=True)  # Run the Flask application in debug mode
+    # Clear data from database
+    Data.delete().execute()
+    # Create table if it doesn't exist
+    Data.create_table(fail_silently=True)
+    # Run the Flask application in debug mode
+    app.run(debug=True)
