@@ -13,7 +13,7 @@ DATABASE = {
     'name': 'data.db',
     'engine': 'peewee.SqliteDatabase'
 }
-SECRET_KEY = 'dingledong'
+SECRET_KEY = 'verisecret'
 
 # Initialize Flask application
 app = flask.Flask(__name__)
@@ -56,7 +56,6 @@ def upload():
                             Gas=float(row['Gas']), 
                             Internet=float(row['Internet']), 
                             Sum=float(row['Sum']))
-            df.to_html('templates/viewtable.html')
             return flask.render_template('upload.html')  
     return flask.render_template('upload.html')  
 
@@ -118,7 +117,6 @@ def example():
     # Create first diagram (bar chart)
     monthlist = df[df['Year'] == 2021]['Month']
     electricity_2021 = df[df['Year'] == 2021]['Electricity']
-    print(electricity_2021)
     
     plt.figure(figsize=(10, 6))
     plt.bar(height=electricity_2021, x=monthlist)
